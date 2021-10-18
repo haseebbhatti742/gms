@@ -1,0 +1,107 @@
+aside.main-sidebar.sidebar-dark-primary.elevation-4
+    // Sidebar
+    .sidebar
+        // Brand Logo
+        a.brand-link(href='/')
+            //img.brand-image.img-circle.elevation-3(src='/images/logo.png' alt='AdminLTE Logo' style='opacity: .8')
+            span.brand-text.font-weight-light Godown Management 
+                br
+                | System
+        //username
+        a.brand-link(href='/')
+            span.brand-text.font-weight-light  #{session.name}
+        // Sidebar Menu
+        nav.mt-2
+            ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview' role='menu' data-accordion='false')
+                li.nav-item
+                    if title == "Home"
+                        a.nav-link.active(href='/home')
+                            i.nav-icon.fas.fa-home
+                            p Dashboard
+                    else
+                        a.nav-link(href='/home')
+                            i.nav-icon.fas.fa-home
+                            p Dashboard 
+                li.nav-item
+                    if title == "Party"
+                        a.nav-link.active(href='/party/add-party')
+                            i.nav-icon.fas.fa-user-plus
+                            p Add Party
+                    else
+                        a.nav-link(href='/party/add-party')
+                            i.nav-icon.fas.fa-user-plus
+                            p Add Party 
+                li.nav-item
+                    if title == "Gate Pass"
+                        a.nav-link.active(href='/gate_pass')
+                            i.nav-icon.fas.fa-id-badge
+                            p Gate Pass
+                    else
+                        a.nav-link(href='/gate_pass')
+                            i.nav-icon.fas.fa-id-badge
+                            p Gate Pass
+                li.nav-item    
+                    if title == "Cash Voucher"
+                        a.nav-link.active(href='/cash_voucher')
+                            i.nav-icon.fas.fa-file-contract
+                            p Cash Voucher
+                    else
+                        a.nav-link(href='/cash_voucher')
+                            i.nav-icon.fas.fa-file-contract
+                            p Cash Voucher
+                li.nav-item
+                    if title == "Advance Cash Voucher"
+                        a.nav-link.active.ml-2(href='#')
+                            i.fa.fa-file &nbsp;
+                            p Advance Cash Voucher
+                                i.fas.fa-angle-left.right
+                        ul.nav.nav-treeview
+                            li.nav-item.ml-2
+                                a.nav-link(href='/advance_cash_voucher')
+                                    i.fas.fa-file-invoice-dollar &nbsp;&nbsp;
+                                    p Add New
+                            li.nav-item.ml-2
+                                a.nav-link(href='/advance_cash_voucher/view_all')
+                                    i.fa.fa-list-alt &nbsp;&nbsp;
+                                    p View All
+                    else
+                        a.nav-link.ml-2(href='#')
+                            i.fa.fa-file &nbsp;
+                            p Advance Cash Voucher
+                                i.fas.fa-angle-left.right
+                        ul.nav.nav-treeview
+                            li.nav-item.ml-2
+                                a.nav-link(href='/advance_cash_voucher')
+                                    i.fas.fa-file-invoice-dollar &nbsp;&nbsp;
+                                    p Add New
+                            li.nav-item.ml-2
+                                a.nav-link(href='/advance_cash_voucher/view_all')
+                                    i.fa.fa-list-alt &nbsp;&nbsp;
+                                    p View All
+                li.nav-item    
+                    if title == "Ledger"
+                        a.nav-link.active(href='/ledger/general')
+                            i.nav-icon.fas.fa-file
+                            p Ledger
+                    else
+                        a.nav-link(href='/ledger/general')
+                            i.nav-icon.fas.fa-file
+                            p Ledger
+                li.nav-item    
+                    if title == "Reports"
+                        a.nav-link.active(href='/reports')
+                            i.nav-icon.fas.fa-file
+                            p Reports
+                    else
+                        a.nav-link(href='/reports')
+                            i.nav-icon.fas.fa-file
+                            p Reports
+                li.nav-item    
+                    if title == "Notes"
+                        a.nav-link.active(href='/notes')
+                            i.nav-icon.fa.fa-sticky-note-o
+                            p Notes
+                    else
+                        a.nav-link(href='/notes')
+                            i.nav-icon.fa.fa-sticky-note-o
+                            p Notes

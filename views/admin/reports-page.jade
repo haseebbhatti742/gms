@@ -1,0 +1,93 @@
+#ledgerReport.col-md-12
+                if status == "error"
+                    h3 #{errorMessage}
+                else
+                    .invoice.p-3.mb-3
+                        // title row
+                        .row
+                            .col-12
+                                h4
+                                    i.fas.fa-globe &nbsp; Godown Management System
+                                    small.float-right Date From: #{dataset.date_from}
+                            // /.col
+                        // info row
+                        .row.invoice-info
+                            .col-sm-6.invoice-col 
+                                //- | Party Info
+                                address
+                                    //- strong #{dataset.party_info.party_name}
+                                    //- br
+                                    //- |                     Phone: #{dataset.party_info.party_contact}
+                            .col-sm-6.invoice-col.float-right
+                                h4
+                                    small.float-right Date To: #{dataset.date_to}
+                        br
+                        .row
+                            .col-12.table-responsive
+                                table.table.table-bordered
+                                    thead.thead-dark
+                                        tr
+                                            th Party
+                                            th Date
+                                            th GP #
+                                            th CV #
+                                            th Head
+                                            th Description
+                                            th Type
+                                            th Weight
+                                            th Rate
+                                            th Debit
+                                            th Credit
+                                            th Balance
+                                    tbody
+                                        -for(let i=0; i<dataset.length; i++){
+                                            tr
+                                                td #{dataset[i].party_name}
+                                                td #{dataset[i].l_date}
+                                                td #{dataset[i].gp_number_manual}
+                                                td #{dataset[i].cv_number_manual}
+                                                td #{dataset[i].l_commodity}
+                                                td #{dataset[i].l_description}
+                                                td #{dataset[i].l_type}
+                                                td #{dataset[i].l_seller_weight}
+                                                td #{dataset[i].l_rate}
+                                                td #{dataset[i].l_debit}
+                                                td #{dataset[i].l_credit}
+                                                td #{dataset[i].l_balance}
+                                                
+                                        -}
+                        .row
+                            // accepted payments column
+                            .col-6
+                                p 
+                                    strong NOTE:
+                                    br
+                                    | Negative Balance = Client Payable
+                                    br
+                                    | Positive Balance = Company Payable
+                            .col-6
+                                .table-responsive
+                                    table.table
+                                        tr
+                                            th Total Weight Out
+                                            td #{total_weight_in}
+                                        tr
+                                            th Total Weight In
+                                            td #{total_weight_out}
+                                        tr
+                                            th Total Debit
+                                            td #{total_recoveries}
+                                        tr
+                                            th Total Credit
+                                            td #{total_expense}
+                                        tr
+                                            th Balance Amount
+                                            td #{balance_amount}
+                            // /.col
+                        // /.row
+                        // this row will not appear when printing
+.col-md-12
+    .row.no-print
+        .col-12
+            a.btn.btn-default.float-right(onclick="printReport()")
+                i.fas.fa-print Print

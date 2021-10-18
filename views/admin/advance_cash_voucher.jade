@@ -1,0 +1,120 @@
+include header1
+include aside
+.content-wrapper
+    section.content
+        .container-fluid
+            include sub-header
+            .col-md-12
+                .card.card-primary.card-outline
+                    .card-header
+                        h3.card-title Cash Voucher Form
+                    .card-body.p-2.mt-2
+                        form.card-tools
+                            .row.form-group
+                                .col-md-2
+                                    .form-group.input-group-md
+                                        label CV Number
+                                        input#cash_voucher_number.form-control(type = "text", value="#{cv_number}", disabled='true')
+                                    #cash_voucher_number_error(style="color:red")
+                                .col-md-2
+                                    .form-group.input-group-md
+                                            label Manual CV #
+                                            input#cash_voucher_number_manual.form-control(type = "text", placeholder="Manual Cash Voucher Number" required)
+                                    #cash_voucher_number_manual_error(style="color:red")
+                                .col-md-6
+                                    .form-group.input-group-md
+                                        label Name
+                                        input#cash_voucher_party_id.form-control(type = "text", placeholder='Enter Name' autocomplete="off" required)
+                                        input#cv_party_id.form-control(type="hidden")
+                                    #cash_voucher_name_error(style="color:red")
+                                .col-md-2 
+                                    .form-group.input-group-md
+                                        label Type
+                                        select#cash_voucher_type.form-control(required)
+                                            option(value="Pay") Pay
+                                            option(value="Receive") Receive
+                                    #cash_voucher_type_error(style="color:red")
+                            .row.form-group
+                                .col-md-3
+                                    .form-group.input-group-md
+                                        label Amount (RS)
+                                        input#cash_voucher_amount.form-control(type = "number", placeholder='Enter Amount' required)
+                                    #cash_voucher_amount_error(style="color:red")
+                                .col-md-3
+                                        .form-group.input-group-md
+                                            label Currency
+                                            select#cash_voucher_currency.form-control
+                                                option(value="$") $
+                                                option(value="RS") RS
+                                .col-md-3
+                                    .form-group.input-group-md
+                                        label Date
+                                        input#cash_voucher_date.form-control(type = "date" required)
+                                    #cash_voucher_date_error(style="color:red")
+                                .col-md-3
+                                    .form-group.input-group-md
+                                        label Contact (Optional)
+                                        input#cash_voucher_contact.form-control(type = "text", placeholder='Enter Contact' required)
+                                    #cash_voucher_signature_error(style="color:red")
+                            .row.form-group
+                                .col-md-3
+                                    .form-group.input-group-md
+                                        label Signature
+                                        input#cash_voucher_signature.form-control(type = "text", placeholder='Enter Signature' required)
+                                    #cash_voucher_signature_error(style="color:red")
+                                .col-md-9
+                                    label Details
+                                    input#cash_voucher_details.form-control(type="text" placeholder="Enter Details Here...", rows="5" required)
+                                #div_commodity.col-md-6(style="display:none")
+                                    .form-group.input-group-md
+                                            label Head
+                                            select#cv_commodity.form-control
+                                                option(value="" selected disabled) Select Head
+                                                option(value="Raw Material") Raw Material 
+                                                option(value="Tools & Consumables") Tools & Consumables 
+                                                option(value="Services") Services 
+                                                option(value="Personal") Personal 
+                                                option(value="Food, Welfare & Entertainment") Food, Welfare & Entertainment
+                                                option(value="Iron Scrap") Iron Scrap 
+                                                option(value="Rotor") Rotor 
+                                                option(value="Cast Iron") Cast Iron 
+                                                option(value="Silver") Silver 
+                                                option(value="Copper") Copper 
+                                                option(value="Khulaai") Khulaai 
+                                                option(value="Wages") Wages
+                                                option(value="Brass") Brass
+                                                option(value="Zinc") Zinc
+                                                option(value="SS") SS
+                                                option(value="Bacha Part") Bacha Part
+                                                option(value="Weight Loss") Weight Loss
+                                                option(value="Chalu") Chalu
+                                                option(value="Misc") Misc
+                                                option(value="Transport") Transport
+                                        #gate_pass_commodity_type_error(style="color:red")
+                            #voucherButtons
+                                .row.form-group
+                                    #divAddVoucher.col-md-2
+                                        button#btnAddVoucher.btn.btn-primary(type="button" onclick="add_commodity()") Add Head
+                                    #divRemoveVoucher.col-md-2(style="display: none")
+                                        button#btnRemoveVoucher.btn.btn-warning(type="button" onclick="remove_commodity()") Remove Head
+                            .col-md-12
+                                #submitButtons
+                                    .row.form-group
+                                        button#btn2.col-md-12.btn.btn-success(type="submit") Submit
+
+include footer
+script(src='/js/advance_cash_voucher.js')
+script.
+    function add_commodity(){
+        document.getElementById("divAddVoucher").style.display = "none"
+        document.getElementById("divRemoveVoucher").style.display = "block"
+        document.getElementById("div_commodity").style.display = "block"
+        document.getElementById("cv_commodity").required = true
+    }
+
+    function remove_commodity(){
+        document.getElementById("divAddVoucher").style.display = "block"
+        document.getElementById("divRemoveVoucher").style.display = "none"
+        document.getElementById("div_commodity").style.display = "none"
+        document.getElementById("cv_commodity").required = false
+    }
