@@ -12,4 +12,8 @@ router.get('/', (req, res, next) => {
     // }
 });
 
+router.post("/add-note", function(req,res){
+    
+})
+
 module.exports = router;
