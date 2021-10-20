@@ -1,0 +1,43 @@
+include header1
+include aside
+.content-wrapper
+    section.content
+        .container-fluid
+            include sub-header
+            //search input
+            .col-md-12
+                if status=="error"
+                    h3 #{errorMessage}
+                else
+                            .row
+                                .col-12.table-responsive
+                                    table.table.table-bordered
+                                        thead.thead-dark
+                                            tr
+                                                th Party
+                                                th Contact
+                                                th Note Date
+                                                th Details
+                                                th Check No.
+                                                th Amount
+                                                th Bank
+                                                th Clear Date
+                                                th Status
+                                                th Action
+                                        tbody
+                                            -for(let i=0; i<length; i++){
+                                                tr
+                                                    td #{dataset[i].note_party_name}
+                                                    td #{dataset[i].note_contact}
+                                                    td #{dataset[i].note_current_date}
+                                                    td #{dataset[i].note_details}
+                                                    td #{dataset[i].note_cheque_number}
+                                                    td #{dataset[i].note_cheque_amount}
+                                                    td #{dataset[i].note_bank_name}
+                                                    td #{dataset[i].note_clear_date}
+                                                    td #{dataset[i].note_status} 
+                                                    td
+                                                        a.btn.btn-success(href="/notes/clear/#{dataset[i].note_entry_id}" style="color:white") Clear
+                                            -}
+                        
+include footer

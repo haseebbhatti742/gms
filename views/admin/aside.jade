@@ -1,16 +1,16 @@
 aside.main-sidebar.sidebar-dark-primary.elevation-4
     // Sidebar
     .sidebar
-        // Brand Logo
+        //Brand Logo
         a.brand-link(href='/')
             //img.brand-image.img-circle.elevation-3(src='/images/logo.png' alt='AdminLTE Logo' style='opacity: .8')
             span.brand-text.font-weight-light Godown Management 
                 br
                 | System
-        //username
+        //Username
         a.brand-link(href='/')
             span.brand-text.font-weight-light  #{session.name}
-        // Sidebar Menu
+        //Sidebar Menu
         nav.mt-2
             ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview' role='menu' data-accordion='false')
                 li.nav-item
@@ -96,12 +96,40 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                         a.nav-link(href='/reports')
                             i.nav-icon.fas.fa-file
                             p Reports
-                li.nav-item    
+                li.nav-item
                     if title == "Notes"
-                        a.nav-link.active(href='/notes')
-                            i.nav-icon.fa.fa-sticky-note-o
+                        a.nav-link.active.ml-2(href='#')
+                            i.fa.fa-sticky-note-o &nbsp;
                             p Notes
+                                i.fas.fa-angle-left.right
+                        ul.nav.nav-treeview
+                            li.nav-item.ml-2
+                                a.nav-link(href='/notes/add-new-note')
+                                    i.fas.fa-file-invoice-dollar &nbsp;&nbsp;
+                                    p Add Note
+                            li.nav-item.ml-2
+                                a.nav-link(href='/notes/view_all')
+                                    i.fa.fa-list-alt &nbsp;&nbsp;
+                                    p View All
+                            li.nav-item.ml-2
+                                a.nav-link(href='/notes/view_pending')
+                                    i.fa.fa-list-alt &nbsp;&nbsp;
+                                    p View Pending
                     else
-                        a.nav-link(href='/notes')
-                            i.nav-icon.fa.fa-sticky-note-o
+                        a.nav-link.ml-2(href='#')
+                            i.fa.fa-sticky-note-o &nbsp;
                             p Notes
+                                i.fas.fa-angle-left.right
+                        ul.nav.nav-treeview
+                            li.nav-item.ml-2
+                                a.nav-link(href='/notes/add-new-note')
+                                    i.fas.fa-file-invoice-dollar &nbsp;&nbsp;
+                                    p Add Note
+                            li.nav-item.ml-2
+                                a.nav-link(href='/notes/view_all')
+                                    i.fa.fa-list-alt &nbsp;&nbsp;
+                                    p View All
+                            li.nav-item.ml-2
+                                a.nav-link(href='/notes/view_pending')
+                                    i.fa.fa-list-alt &nbsp;&nbsp;
+                                    p View Pending

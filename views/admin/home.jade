@@ -7,9 +7,12 @@ include aside
             .col-md-12
                 .card.card-success.card-outline
                     .card-header
-                        h3.card-title Amounts
+                        h3.card-title Dashboard
                     .card-body.p-2.mt-2
-                         .card-tools
+                        .card-tools
+                            .row
+                                .col-md-4
+                                    h3.card-title Amounts
                             .row
                                 .col-md-4
                                     .small-box.bg-danger
@@ -28,12 +31,9 @@ include aside
                                         .inner 
                                             h4 #{balance_amount}
                                             p Balance Amount
-            .col-md-12
-                .card.card-success.card-outline
-                    .card-header
-                        h3.card-title Weights
-                    .card-body.p-2.mt-2
-                         .card-tools
+                            .row
+                                .col-md-4
+                                    h3.card-title Weights
                             .row
                                 .col-md-4
                                     .small-box.bg-danger
@@ -50,7 +50,25 @@ include aside
                                         .inner 
                                             h4 #{balance_weight}
                                             p Balance Weight
-            #gatePassDiv
+                            .row
+                                .col-md-4
+                                    h3.card-title Notes
+                            .row
+                                .col-md-4
+                                    .small-box.bg-danger
+                                        .inner 
+                                            h4 #{total_weight_out}
+                                            p Total Cheques
+                                .col-md-4
+                                    .small-box.bg-success
+                                        .inner 
+                                            h4 #{total_weight_in}
+                                            p Paid Cheques
+                                .col-md-4
+                                    .small-box.bg-info
+                                        .inner 
+                                            h4 #{balance_weight}
+                                            p Pending Cheques
 
 include footer
 script(src='/js/home.js')

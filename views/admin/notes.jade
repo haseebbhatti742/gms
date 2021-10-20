@@ -10,7 +10,7 @@ include aside
                     .card-header
                         h3.card-title Add Note
                     .card-body.p-2.mt-2
-                         .card-tools
+                        .card-tools
                             #tab1
                                 .row.form-group
                                     .col-md-6
@@ -37,10 +37,14 @@ include aside
                                         #details_error(style="color:red")
                             #tab2
                                 #gp_row0.row.form-group
-                                    .col-md-3
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Cheque No.
                                             input#note_check_no0.form-control(type="text" placeholder="Cheque Number")
+                                    .col-md-2
+                                        .form-group.input-group-md
+                                            label Amount
+                                            input#note_check_amount0.form-control(type="number" placeholder="Amount")
                                     .col-md-3
                                         .form-group.input-group-md
                                             label Bank Name
@@ -49,7 +53,7 @@ include aside
                                         .form-group.input-group-md
                                             label Cheque Clear Date
                                             input#note_clear_date0.form-control(type="date" placeholder="Cheque Clear Date")
-                                    .col-md-3
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Status
                                             select#note_status0.form-control
