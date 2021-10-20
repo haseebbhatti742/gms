@@ -4,13 +4,13 @@ const router = express.Router();
 const app = require("../../app");
 
 router.get("/add-new-note", (req, res, next) => {
-  // if (req.session.username == undefined) {
-  //     res.redirect('/');
-  // } else if (req.session.username != undefined && req.session.type == "admin") {
-  res.locals.title = "Notes";
-  res.locals.subtitle = "Add Notes";
-  res.render("admin/notes");
-  // }
+  if (req.session.username == undefined) {
+      res.redirect('/');
+  } else if (req.session.username != undefined && req.session.type == "admin") {
+    res.locals.title = "Notes";
+    res.locals.subtitle = "Add Notes";
+    res.render("admin/notes");
+  }
 });
 
 router.post("/add-note", function (req, res) {
@@ -99,5 +99,26 @@ router.get("/clear/:note_entry_id", (req,res)=>{
     else res.redirect("/notes/view_pending")
   })
 })
+
+router.get("/show-notes/:party_id", function (req, res) {
+  party_id = req.params.party_id
+  const query1 = `select * from notes join note_entries on notes.note_id=note_entries.note_id where notes.note_party_id='${party_id}' order by note_entry_id desc`;
+  app.conn.query(query1, function (err, result1) {
+    if(err) {res.render("admin/show_notes", {status: "error", errorMessage:err.message})}
+    else if(result1.length==0) {res.render("admin/show_notes", {status: "error", errorMessage:"No Record Found"})}
+    else {
+      for(let i=0; i<result1.length; i++){
+        note_current_date = new Date(result1[i].note_current_date)
+        note_current_date = note_current_date.getDate()+"-"+(note_current_date.getMonth()+1)+"-"+note_current_date.getFullYear()
+        result1[i].note_current_date = note_current_date
+
+        note_clear_date = new Date(result1[i].note_clear_date)
+        note_clear_date = note_clear_date.getDate()+"-"+(note_clear_date.getMonth()+1)+"-"+note_clear_date.getFullYear()
+        result1[i].note_clear_date = note_clear_date
+      }
+      res.render("admin/show_notes", {status: "ok", length:result1.length, dataset:result1})
+    }
+  });
+});
 
 module.exports = router;

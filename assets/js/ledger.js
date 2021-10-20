@@ -62,6 +62,28 @@ function getParty() {
     })
 }
 
+function showNotes(party_id){
+  document.getElementById("buttonShowNotes").style.display = "none"
+  document.getElementById("buttonHideNotes").style.display = "block"
+  document.getElementById("notes").innerHTML = ""
+  
+  url = "/notes/show-notes/"+party_id
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("notes").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function hideNotes(){
+  document.getElementById("buttonShowNotes").style.display = "block"
+  document.getElementById("buttonHideNotes").style.display = "none"
+  document.getElementById("notes").innerHTML = ""
+}
+
 //autocomplete start
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,

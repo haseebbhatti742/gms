@@ -75,10 +75,16 @@
                                         tr
                                             th Balance Amount
                                             td #{balance_amount}
+                        .row
+                            #notes
+                        
                             // /.col
                         // /.row
                         // this row will not appear when printing
 .col-md-12
+    .row
+        button#buttonShowNotes.btn.btn-success(onclick="showNotes(#{dataset.party_info.party_id})" style="display:block") View Notes
+        button#buttonHideNotes.btn.btn-warning(onclick="hideNotes()" style="display:none") Hide Notes
     .row.no-print
         .col-12
             a.btn.btn-default.float-right(onclick="printLedger()")

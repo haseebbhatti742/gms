@@ -23,7 +23,23 @@ router.get('/', async function(req, res){
         total_weight_out = total_weight_out.toLocaleString('en-US')
         balance_weight = balance_weight.toLocaleString('en-US')
 
-        res.render('admin/home', {total_expense,total_recoveries,balance_amount,total_weight_in, total_weight_out, balance_weight});
+        total_cheques = await getTotalCheques()
+        paid_cheques = await getPaidCheques()
+        pending_cheques = await getPendingCheques()
+
+        let dataset = {
+            total_expense,
+            total_recoveries,
+            balance_amount,
+            total_weight_in, 
+            total_weight_out, 
+            balance_weight, 
+            total_cheques, 
+            paid_cheques, 
+            pending_cheques
+        }
+
+        res.render('admin/home', dataset);
     }
 });
 
@@ -99,6 +115,39 @@ function getTotalWeightsOut(){
         app.conn.query(query, function(err,result){
             if(err) {console.log(err.message)}
             else if(result.length>0) {resolve(result[0].total_weight_out)}
+            else if(result.length==0) {resolve("0")}
+        })
+    })
+}
+
+function getTotalCheques(){
+    return new Promise(function(resolve,reject){
+        query = "select ifnull(count(note_entry_id),0) as cheques from note_entries"
+        app.conn.query(query, function(err,result){
+            if(err) {console.log(err.message)}
+            else if(result.length>0) {resolve(result[0].cheques)}
+            else if(result.length==0) {resolve("0")}
+        })
+    })
+}
+
+function getPaidCheques(){
+    return new Promise(function(resolve,reject){
+        query = "select ifnull(count(note_entry_id),0) as cheques from note_entries where note_status='Paid'"
+        app.conn.query(query, function(err,result){
+            if(err) {console.log(err.message)}
+            else if(result.length>0) {resolve(result[0].cheques)}
+            else if(result.length==0) {resolve("0")}
+        })
+    })
+}
+
+function getPendingCheques(){
+    return new Promise(function(resolve,reject){
+        query = "select ifnull(count(note_entry_id),0) as cheques from note_entries where note_status='Pending'"
+        app.conn.query(query, function(err,result){
+            if(err) {console.log(err.message)}
+            else if(result.length>0) {resolve(result[0].cheques)}
             else if(result.length==0) {resolve("0")}
         })
     })
