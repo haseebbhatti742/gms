@@ -148,27 +148,16 @@ inputQuantity.addEventListener('input', (event) => {
         getGrandTotal()
     }
 })
-
 inputUnitAmount.addEventListener('input', (event) => {
-    unitAmount = inputUnitAmount.value
-    type = inputAmountType.value
-    if(type == "KGS"){
-        unitAmount = unitAmount
-    } else if (type == "MONS"){
-        unitAmount = parseFloat(unitAmount/37.324)
-    } else if (type == "TONS"){
-        unitAmount = parseFloat(unitAmount/1000)
-    }
-
     if(inputQuantity.value == ""){
-        inputTotalAmount.value =  unitAmount
+        inputTotalAmount.value = inputUnitAmount.value
         getGrandTotal()
-    } else{
-        inputTotalAmount.value = inputQuantity.value * unitAmount
+    }
+    else{
+        inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
         getGrandTotal()
     }
 })
-
 inputAmountType.addEventListener('change', (event)=>{
     type = inputAmountType.value  
     if(type == "KGS"){

@@ -4,9 +4,9 @@ const app = require('../../app')
 const ledger = require("../admin/ledger")
 
 router.get('/', (req, res) => {
-    // if (req.session.username == undefined) {
-    //     res.redirect('/');
-    // } else if (req.session.username != undefined && req.session.type == "admin") {
+    if (req.session.username == undefined) {
+        res.redirect('/');
+    } else if (req.session.username != undefined && req.session.type == "admin") {
         res.locals.title = 'Gate Pass';
         res.locals.subtitle = 'Gate Pass';
 
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
                     res.render('admin/gate_pass', {gp_number: (result[0].gp_number+1)});
             }
         })
-    // }
+    }
 });
 
 router.post("/add-gate-pass", function(req,res){

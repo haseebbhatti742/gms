@@ -83,7 +83,7 @@ include aside
                             #tab2
                                 #gp_row0.row.form-group
                                     //col commodity
-                                    .col-md-3
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Commodity
                                             select#gate_pass_commodity0.form-control
@@ -109,16 +109,16 @@ include aside
                                                 option(value="Transport") Transport
                                         #gate_pass_commodity_type_error(style="color:red")
                                     //col quantity
-                                    .col-md-3
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Weight
                                             input#gate_pass_quantity0.form-control(type = "number", placeholder='Enter Weight')
                                         #gate_pass_quantity_error(style="color:red")
                                     //col unit
-                                    .col-md-3
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Unit
-                                            select#gate_pass_unit0.form-control
+                                            select#gate_pass_unit0. form-control
                                                 option(value="KGS") KGS
                                                 option(value="MONS") MONS
                                                 option(value="TONS") TONS
@@ -126,27 +126,27 @@ include aside
                                                 option(value="PCS") PCS 
                                         #gate_pass_unit_error(style="color:red")
                                     //col unit amount
-                                    .col-md-3
+                                    //.col-md-2
+                                        .form-group.input-group-md
+                                            label Amount Type
+                                            select#gate_pass_amount_type0. form-control
+                                                option(value="KGS") KGS
+                                                option(value="MONS") MONS
+                                                option(value="TONS") TONS 
+                                    //col unit amount
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Unit Amount
                                             input#gate_pass_unit_amount0.form-control(type = "number", placeholder='Enter Unit Amount')
                                         #gate_pass_unit_amount_error(style="color:red")
-                                    .col-md-3
-                                        .form-group.input-group-md
-                                            label Amount Type
-                                            select#gate_pass_amount_type0.form-control
-                                                option(value="KGS") KGS
-                                                option(value="MONS") MONS
-                                                option(value="TONS") TONS
-                                        #gate_pass_unit_error(style="color:red")
                                     //col total amount
-                                    .col-md-3
+                                    .col-md-2
                                         .form-group.input-group-md
                                             label Total Amount
                                             input#gate_pass_total_amount0.form-control(type = "number", placeholder='Enter Total Amount')
                                         #gate_pass_total_amount_error(style="color:red")
                                     //col details
-                                    .col-md-6
+                                    .col-md-2
                                         label Details
                                         input#gate_pass_details0.form-control(type="text", placeholder="Enter Details Here...")
                                 .row

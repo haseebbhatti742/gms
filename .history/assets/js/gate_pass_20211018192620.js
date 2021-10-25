@@ -128,61 +128,23 @@ function submitForm(){
 inputQuantity = document.getElementById("gate_pass_quantity0");
 inputUnitAmount = document.getElementById("gate_pass_unit_amount0");
 inputTotalAmount = document.getElementById("gate_pass_total_amount0");
-inputAmountType = document.getElementById("gate_pass_amount_type0");
 inputQuantity.addEventListener('input', (event) => {
-    unitAmount = inputUnitAmount.value
-    type = inputAmountType.value
-    if(type == "KGS"){
-        unitAmount = unitAmount
-    } else if (type == "MONS"){
-        unitAmount = parseFloat(unitAmount/37.324)
-    } else if (type == "TONS"){
-        unitAmount = parseFloat(unitAmount/1000)
-    }
-
     if(inputQuantity.value == ""){
-        inputTotalAmount.value = unitAmount
-        getGrandTotal()
-    } else{
-        inputTotalAmount.value = inputQuantity.value * unitAmount
+        inputTotalAmount.value = inputUnitAmount.value
         getGrandTotal()
     }
-})
-
-inputUnitAmount.addEventListener('input', (event) => {
-    unitAmount = inputUnitAmount.value
-    type = inputAmountType.value
-    if(type == "KGS"){
-        unitAmount = unitAmount
-    } else if (type == "MONS"){
-        unitAmount = parseFloat(unitAmount/37.324)
-    } else if (type == "TONS"){
-        unitAmount = parseFloat(unitAmount/1000)
-    }
-
-    if(inputQuantity.value == ""){
-        inputTotalAmount.value =  unitAmount
-        getGrandTotal()
-    } else{
-        inputTotalAmount.value = inputQuantity.value * unitAmount
-        getGrandTotal()
-    }
-})
-
-inputAmountType.addEventListener('change', (event)=>{
-    type = inputAmountType.value  
-    if(type == "KGS"){
+    else{
         inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
         getGrandTotal()
-    } else if (type == "MONS"){
-        price = parseFloat(inputUnitAmount.value/37.324)
-        total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-        inputTotalAmount.value = total
+    }
+})
+inputUnitAmount.addEventListener('input', (event) => {
+    if(inputQuantity.value == ""){
+        inputTotalAmount.value = inputUnitAmount.value
         getGrandTotal()
-    } else if (type == "TONS"){
-        price = parseFloat(inputUnitAmount.value/1000)
-        total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-        inputTotalAmount.value = total
+    }
+    else{
+        inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
         getGrandTotal()
     }
 })
@@ -251,7 +213,6 @@ function getGatePass(){
             gate_pass_unit_amount = document.getElementById('gate_pass_unit_amount'+i).value;
             gate_pass_total_amount = document.getElementById('gate_pass_total_amount'+i).value;
             gate_pass_details = document.getElementById('gate_pass_details'+i).value;
-            gate_pass_amount_type = document.getElementById('gate_pass_amount_type'+i).value;
 
             let row = {};
             row.commodity = gate_pass_commodity;
@@ -260,7 +221,6 @@ function getGatePass(){
             row.unit_amount = gate_pass_unit_amount;
             row.total_amount = gate_pass_total_amount;
             row.details = gate_pass_details;
-            row.amount_type = gate_pass_amount_type;
                 
             data[i] = row
         }
@@ -385,7 +345,7 @@ function addCommodity(){
 
     //making col commodity start
     var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
+        col_md_2.setAttribute("class", "col-md-2");
     var form_group = document.createElement("div");
         form_group.setAttribute("class", "form-group input-group-md");
     var label = document.createElement("label");
@@ -503,7 +463,7 @@ function addCommodity(){
 
     //making col quantity start
     var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
+        col_md_2.setAttribute("class", "col-md-2");
     
     var form_group = document.createElement("div");
         form_group.setAttribute("class", "form-group input-group-md");
@@ -536,7 +496,7 @@ function addCommodity(){
     
     //making col unit start
     var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
+        col_md_2.setAttribute("class", "col-md-2");
     var form_group = document.createElement("div");
         form_group.setAttribute("class", "form-group input-group-md");
     var label = document.createElement("label");
@@ -579,7 +539,7 @@ function addCommodity(){
 
     //making col amount start
     var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
+        col_md_2.setAttribute("class", "col-md-2");
     
     var form_group = document.createElement("div");
         form_group.setAttribute("class", "form-group input-group-md");
@@ -610,60 +570,9 @@ function addCommodity(){
     gp_row.appendChild(col_md_2)    
     //making col amount end
 
-    //making col Amount Type start
-    var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
-    var form_group = document.createElement("div");
-        form_group.setAttribute("class", "form-group input-group-md");
-    var label = document.createElement("label");
-        label.innerHTML = "Amount Type";
-
-    var unit_select = document.createElement("select");
-        unit_select.setAttribute("class", "form-control")
-        unit_select.setAttribute("id", "gate_pass_amount_type"+idCounter)
-
-        var option1 = document.createElement("option")
-            option1.setAttribute("value", "KGS")
-            option1.innerText = "KGS"
-            unit_select.appendChild(option1)
-
-        var option5 = document.createElement("option")
-            option5.setAttribute("value", "MONS")
-            option5.innerText = "MONS"
-            unit_select.appendChild(option5)
-
-        var option4 = document.createElement("option")
-            option4.setAttribute("value", "TONS")
-            option4.innerText = "TONS"
-            unit_select.appendChild(option4)
-
-        unit_select.addEventListener('change', (event)=>{
-                type = unit_select.value  
-                if(type == "KGS"){
-                    inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
-                    getGrandTotal()
-                } else if (type == "MONS"){
-                    price = parseFloat(inputUnitAmount.value/37.324)
-                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-                    inputTotalAmount.value = total
-                    getGrandTotal()
-                } else if (type == "TONS"){
-                    price = parseFloat(inputUnitAmount.value/1000)
-                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-                    inputTotalAmount.value = total
-                    getGrandTotal()
-                }
-            })
-
-    form_group.appendChild(label);
-    form_group.appendChild(unit_select);
-    col_md_2.appendChild(form_group);
-    gp_row.appendChild(col_md_2);
-    //making col Amount Type end
-
     //making col total amount start
     var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
+        col_md_2.setAttribute("class", "col-md-2");
     
     var form_group = document.createElement("div");
         form_group.setAttribute("class", "form-group input-group-md");
@@ -685,7 +594,7 @@ function addCommodity(){
 
     //making col details start
     var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-6");
+        col_md_2.setAttribute("class", "col-md-2");
     
     var form_group = document.createElement("div");
         form_group.setAttribute("class", "form-group input-group-md");

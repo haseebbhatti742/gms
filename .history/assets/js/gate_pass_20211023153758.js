@@ -130,59 +130,37 @@ inputUnitAmount = document.getElementById("gate_pass_unit_amount0");
 inputTotalAmount = document.getElementById("gate_pass_total_amount0");
 inputAmountType = document.getElementById("gate_pass_amount_type0");
 inputQuantity.addEventListener('input', (event) => {
-    unitAmount = inputUnitAmount.value
-    type = inputAmountType.value
-    if(type == "KGS"){
-        unitAmount = unitAmount
-    } else if (type == "MONS"){
-        unitAmount = parseFloat(unitAmount/37.324)
-    } else if (type == "TONS"){
-        unitAmount = parseFloat(unitAmount/1000)
-    }
-
     if(inputQuantity.value == ""){
-        inputTotalAmount.value = unitAmount
+        inputTotalAmount.value = inputUnitAmount.value
         getGrandTotal()
-    } else{
-        inputTotalAmount.value = inputQuantity.value * unitAmount
+    }
+    else{
+        inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
         getGrandTotal()
     }
 })
-
 inputUnitAmount.addEventListener('input', (event) => {
-    unitAmount = inputUnitAmount.value
-    type = inputAmountType.value
-    if(type == "KGS"){
-        unitAmount = unitAmount
-    } else if (type == "MONS"){
-        unitAmount = parseFloat(unitAmount/37.324)
-    } else if (type == "TONS"){
-        unitAmount = parseFloat(unitAmount/1000)
-    }
-
     if(inputQuantity.value == ""){
-        inputTotalAmount.value =  unitAmount
+        inputTotalAmount.value = inputUnitAmount.value
         getGrandTotal()
-    } else{
-        inputTotalAmount.value = inputQuantity.value * unitAmount
+    }
+    else{
+        inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
         getGrandTotal()
     }
 })
-
 inputAmountType.addEventListener('change', (event)=>{
     type = inputAmountType.value  
     if(type == "KGS"){
         inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
         getGrandTotal()
     } else if (type == "MONS"){
-        price = parseFloat(inputUnitAmount.value/37.324)
-        total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-        inputTotalAmount.value = total
+        quantity = parseFloat(inputQuantity.value/37.324)
+        inputTotalAmount.value = quantity * inputUnitAmount.value
         getGrandTotal()
     } else if (type == "TONS"){
-        price = parseFloat(inputUnitAmount.value/1000)
-        total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-        inputTotalAmount.value = total
+        quantity = parseFloat(inputQuantity.value/1000)
+        inputTotalAmount.value = quantity * inputUnitAmount.value
         getGrandTotal()
     }
 })
@@ -636,24 +614,6 @@ function addCommodity(){
             option4.setAttribute("value", "TONS")
             option4.innerText = "TONS"
             unit_select.appendChild(option4)
-
-        unit_select.addEventListener('change', (event)=>{
-                type = unit_select.value  
-                if(type == "KGS"){
-                    inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
-                    getGrandTotal()
-                } else if (type == "MONS"){
-                    price = parseFloat(inputUnitAmount.value/37.324)
-                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-                    inputTotalAmount.value = total
-                    getGrandTotal()
-                } else if (type == "TONS"){
-                    price = parseFloat(inputUnitAmount.value/1000)
-                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-                    inputTotalAmount.value = total
-                    getGrandTotal()
-                }
-            })
 
     form_group.appendChild(label);
     form_group.appendChild(unit_select);
