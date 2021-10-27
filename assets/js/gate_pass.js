@@ -384,12 +384,12 @@ function addCommodity(){
     //making gp_row end
 
     //making col commodity start
-    var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
-    var form_group = document.createElement("div");
-        form_group.setAttribute("class", "form-group input-group-md");
-    var label = document.createElement("label");
-        label.innerHTML = "Commodity";
+    var col_md_2_commodity = document.createElement("div");
+        col_md_2_commodity.setAttribute("class", "col-md-3");
+    var form_group_commodity = document.createElement("div");
+        form_group_commodity.setAttribute("class", "form-group input-group-md");
+    var label_commodity = document.createElement("label");
+        label_commodity.innerHTML = "Commodity";
 
     var commodity_select = document.createElement("select");
         commodity_select.setAttribute("class", "form-control")
@@ -495,11 +495,56 @@ function addCommodity(){
             option21.innerText = "Transport"
             commodity_select.appendChild(option21)
 
-    form_group.appendChild(label);
-    form_group.appendChild(commodity_select);
-    col_md_2.appendChild(form_group);
-    gp_row.appendChild(col_md_2);
+    form_group_commodity.appendChild(label_commodity);
+    form_group_commodity.appendChild(commodity_select);
+    col_md_2_commodity.appendChild(form_group_commodity);
+    gp_row.appendChild(col_md_2_commodity);
     //making col commodity end
+
+    //making col Amount Type start
+    var col_md_2_type = document.createElement("div");
+        col_md_2_type.setAttribute("class", "col-md-3");
+    var form_group_type = document.createElement("div");
+        form_group_type.setAttribute("class", "form-group input-group-md");
+    var label_type = document.createElement("label");
+        label_type.innerHTML = "Amount Type";
+
+    var unit_type_select = document.createElement("select");
+        unit_type_select.setAttribute("class", "form-control")
+        unit_type_select.setAttribute("id", "gate_pass_amount_type"+idCounter)
+
+        var option1_type = document.createElement("option")
+            option1_type.setAttribute("value", "KGS")
+            option1_type.innerText = "KGS"
+            unit_type_select.appendChild(option1_type)
+
+        var option5_type = document.createElement("option")
+            option5_type.setAttribute("value", "MONS")
+            option5_type.innerText = "MONS"
+            unit_type_select.appendChild(option5_type)
+
+        var option4_type = document.createElement("option")
+            option4_type.setAttribute("value", "TONS")
+            option4_type.innerText = "TONS"
+            unit_type_select.appendChild(option4_type)
+
+        unit_type_select.addEventListener('change', (event)=>{
+                type = unit_type_select.value  
+                if(type == "KGS"){
+                    inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
+                    getGrandTotal()
+                } else if (type == "MONS"){
+                    price = parseFloat(inputUnitAmount.value/37.324)
+                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
+                    inputTotalAmount.value = total
+                    getGrandTotal()
+                } else if (type == "TONS"){
+                    price = parseFloat(inputUnitAmount.value/1000)
+                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
+                    inputTotalAmount.value = total
+                    getGrandTotal()
+                }
+            })
 
     //making col quantity start
     var col_md_2 = document.createElement("div");
@@ -517,12 +562,22 @@ function addCommodity(){
         inputQuantity.setAttribute("class","form-control");
         inputQuantity.setAttribute("placeholder","Enter Weight");
         inputQuantity.addEventListener('input', (event) => {
+            unitAmount = inputUnitAmount.value
+            type = unit_select.value
+            if(type == "KGS"){
+                unitAmount = unitAmount
+            } else if (type == "MONS"){
+                unitAmount = parseFloat(unitAmount/37.324)
+            } else if (type == "TONS"){
+                unitAmount = parseFloat(unitAmount/1000)
+            }
+            
             if(inputQuantity.value == ""){
-                inputTotalAmount.value = inputUnitAmount.value
+                inputTotalAmount.value = unitAmount
                 getGrandTotal()
             }
             else{
-                inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
+                inputTotalAmount.value = inputQuantity.value * unitAmount
                 getGrandTotal()
             }
             
@@ -535,12 +590,12 @@ function addCommodity(){
     //making col quantity end
     
     //making col unit start
-    var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
-    var form_group = document.createElement("div");
-        form_group.setAttribute("class", "form-group input-group-md");
-    var label = document.createElement("label");
-        label.innerHTML = "Unit";
+    var col_md_2_unit = document.createElement("div");
+        col_md_2_unit.setAttribute("class", "col-md-3");
+    var form_group_unit = document.createElement("div");
+        form_group_unit.setAttribute("class", "form-group input-group-md");
+    var label_unit = document.createElement("label");
+        label_unit.innerHTML = "Unit";
 
     var unit_select = document.createElement("select");
         unit_select.setAttribute("class", "form-control")
@@ -571,10 +626,10 @@ function addCommodity(){
             option3.innerText = "PCS"
             unit_select.appendChild(option3)
 
-    form_group.appendChild(label);
-    form_group.appendChild(unit_select);
-    col_md_2.appendChild(form_group);
-    gp_row.appendChild(col_md_2);
+    form_group_unit.appendChild(label_unit);
+    form_group_unit.appendChild(unit_select);
+    col_md_2_unit.appendChild(form_group_unit);
+    gp_row.appendChild(col_md_2_unit);
     //making col unit end
 
     //making col amount start
@@ -593,12 +648,22 @@ function addCommodity(){
         inputUnitAmount.setAttribute("class","form-control");
         inputUnitAmount.setAttribute("placeholder","Enter Amount");
         inputUnitAmount.addEventListener('input', (event) => {
+            unitAmount = inputUnitAmount.value
+            type = unit_select.value
+            if(type == "KGS"){
+                unitAmount = unitAmount
+            } else if (type == "MONS"){
+                unitAmount = parseFloat(unitAmount/37.324)
+            } else if (type == "TONS"){
+                unitAmount = parseFloat(unitAmount/1000)
+            }
+
             if(inputQuantity.value == ""){
-                inputTotalAmount.value = inputUnitAmount.value
+                inputTotalAmount.value = unitAmount
                 getGrandTotal()
             }
             else{
-                inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
+                inputTotalAmount.value = inputQuantity.value * unitAmount
                 getGrandTotal()
             }
             
@@ -610,55 +675,11 @@ function addCommodity(){
     gp_row.appendChild(col_md_2)    
     //making col amount end
 
-    //making col Amount Type start
-    var col_md_2 = document.createElement("div");
-        col_md_2.setAttribute("class", "col-md-3");
-    var form_group = document.createElement("div");
-        form_group.setAttribute("class", "form-group input-group-md");
-    var label = document.createElement("label");
-        label.innerHTML = "Amount Type";
 
-    var unit_select = document.createElement("select");
-        unit_select.setAttribute("class", "form-control")
-        unit_select.setAttribute("id", "gate_pass_amount_type"+idCounter)
-
-        var option1 = document.createElement("option")
-            option1.setAttribute("value", "KGS")
-            option1.innerText = "KGS"
-            unit_select.appendChild(option1)
-
-        var option5 = document.createElement("option")
-            option5.setAttribute("value", "MONS")
-            option5.innerText = "MONS"
-            unit_select.appendChild(option5)
-
-        var option4 = document.createElement("option")
-            option4.setAttribute("value", "TONS")
-            option4.innerText = "TONS"
-            unit_select.appendChild(option4)
-
-        unit_select.addEventListener('change', (event)=>{
-                type = unit_select.value  
-                if(type == "KGS"){
-                    inputTotalAmount.value = inputQuantity.value * inputUnitAmount.value
-                    getGrandTotal()
-                } else if (type == "MONS"){
-                    price = parseFloat(inputUnitAmount.value/37.324)
-                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-                    inputTotalAmount.value = total
-                    getGrandTotal()
-                } else if (type == "TONS"){
-                    price = parseFloat(inputUnitAmount.value/1000)
-                    total = (Math.round((inputQuantity.value * price) * 100) / 100).toFixed(2)
-                    inputTotalAmount.value = total
-                    getGrandTotal()
-                }
-            })
-
-    form_group.appendChild(label);
-    form_group.appendChild(unit_select);
-    col_md_2.appendChild(form_group);
-    gp_row.appendChild(col_md_2);
+    form_group_type.appendChild(label_type);
+    form_group_type.appendChild(unit_type_select);
+    col_md_2_type.appendChild(form_group_type);
+    gp_row.appendChild(col_md_2_type);
     //making col Amount Type end
 
     //making col total amount start
